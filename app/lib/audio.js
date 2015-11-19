@@ -48,6 +48,15 @@ class Audio {
 	  }.bind(this);
 	  request.send();
 	}
+
+	play() {
+    	this.audioCtx.resume();
+  	}
+
+  	pause() {
+   		this.audioCtx.suspend();
+  	}
+
 	
 }
 export default Audio;

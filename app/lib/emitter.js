@@ -1,10 +1,9 @@
 import Particle from './particle'
 class Emitter {
+    
     constructor(scene){
         this.scene = scene;
         this.pool = [];
-        this.pool2 = [];
-        this.pool3 = [];
         this.particles = [];
         this.options = {
             x: window.innerWidth / 2,
@@ -12,8 +11,7 @@ class Emitter {
             color: '0xFFFFFF'
         };
         this.currentTime = 0;
-        this.createPool(14000,this.options);
-        console.log(this.pool);
+        this.createPool(30000,this.options);
         this.throw(100);
     }
     createPool(nb, options){
@@ -70,27 +68,32 @@ class Emitter {
         }
     }
 
-    onTreble(dt){
+    onTreble(dt, nb){
     	this.currentTime += dt;
 
     	if(this.currentTime > 1380){
     		this.currentTime = 0;
-    		this.throw(3, 1);
-            for(var i = 0; i < this.particles.length; i++) {
-            let p = this.particles[i];
- 
-            p.pulse();
-            p.update(dt);
-        }
+    		this.throw(nb, 1);
+            // for(var i = 0; i < this.particles.length; i++) {
+            //     let p = this.particles[i];
+                
+            //     p.pulse();
+            //     p.update(dt);
+            // }
     	}
     }
 
-    onSnare(dt){
+    onSnare(dt, nb){
     	this.currentTime += dt;
     	if(this.currentTime > 1380){
     		this.currentTime = 0;
     		
-    		this.throw(3, 2);
+    		this.throw(nb, 2);
+            for(var i = 0; i < this.particles.length; i++) {
+                let p = this.particles[i];
+
+                p.pulse(dt);
+            }
     	}
 
     }

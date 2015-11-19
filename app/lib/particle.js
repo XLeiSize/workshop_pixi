@@ -11,8 +11,8 @@ class Particle extends Graphics{
 		this.vx = 2;
 		this.vy = 2;
 		this.angle =  Math.floor(Math.random() * 360)+1;
-		this.variation = Math.floor(Math.random() *5);
-		this.life = Math.random()*5000;
+		this.variation = Math.floor(Math.random() *1);
+		this.life = Math.random()*3000;
 		this.beginFill(this.options.color);
 		this.size =Math.random()*5;
 		this.drawCircle(0, 0, this.size);
@@ -33,13 +33,17 @@ class Particle extends Graphics{
 		}
 		this.life -= dt;
 	}
+	updateSlow(){
+		this.x += Math.sin(this.angle * Math.PI/180) * this.vx/2;
+		this.y += Math.cos(this.angle * Math.PI/180) * this.vy/2;
+		
+	}
 
 
 	reset(){
 		this.x = this.options.x;
 		this.y = this.options.y;
-		
-		this.life = Math.random()*5000;
+		this.life = Math.random()*3000;
 		this.isDead = false;
 	}
 
@@ -47,9 +51,13 @@ class Particle extends Graphics{
 		this.beginFill(color);
 	}
 
-	pulse(){
-		this.variation += Math.sin(this.angle);
+	pulse(dt){
+		this.vx = 1.5;
+		this.vy = 1.5;
+		this.variation = Math.floor(Math.random() *5);
+		this.updateSlow();
 	}
+
 
 }
 
