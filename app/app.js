@@ -94,7 +94,7 @@ class App {
 
 
     this.graph.clear();
-    this.decagone.clear();
+    
 
 
 
@@ -179,10 +179,10 @@ class App {
       //     console.log('BLING');
       // }
 
-        if(this.audio.frequencyData[133]>220){
-            this.decagone.update();
-            console.log('BLINGBLINGBLI');
-        }
+      if(this.audio.frequencyData[133]>220){
+          this.decagone.update();
+          console.log('BLINGBLINGBLI');
+      }
   
      
 

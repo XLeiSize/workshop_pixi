@@ -52,25 +52,21 @@ class Decagone extends Graphics{
 
 
 	update(){
-		
+		this.clear();
+		console.log(this.lines.length);
 		this.update1(1);
 		this.drawDecagone();
-		this.reset(1);
+		// this.reset(1);
 		
 	}
 
 	update1(i){
-		let x1 = this.lines[i].x;
-		let	y1 = this.lines[i].y;
-		let	x2 = this.lines[i+1].x;
-		let	y2 = this.lines[i+1].y;
+		this.lines[i].x *=1;
+		this.lines[i].y *=1.1;
+		this.lines[i+1].x *=1;
+		this.lines[i+1].y *=1.1;
 
-		x1 *= 1;
-		y1 *= 1.1;
-		x2 *= 1;
-		y2 *= 1.1;
-		this.lines.splice(i,0,{x:x1, y:y1});
-		this.lines.splice(i+1,0,{x:x2, y:y2});
+		console.log(this.lines[i].y);
 
 	}	
 
