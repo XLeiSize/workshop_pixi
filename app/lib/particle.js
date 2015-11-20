@@ -42,7 +42,8 @@ class Particle extends Graphics{
 		this.isDead = false;
 	}
 
-	pulse(dt){
+	// Variation de la velocité à un instant donnée
+	pulse(){
 		this.vx = 1.5;
 		this.vy = 1.5;
 		this.variation = Math.floor(Math.random() *5);

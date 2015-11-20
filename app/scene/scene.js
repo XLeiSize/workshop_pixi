@@ -1,4 +1,4 @@
-import { WebGLRenderer, Container } from 'pixi.js';
+import { CanvasRenderer, WebGLRenderer, Container } from 'pixi.js';
 var pixi = require('pixi.js')
 
 class Scene {

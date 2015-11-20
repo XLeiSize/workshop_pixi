@@ -11,9 +11,12 @@ class Emitter {
             color: '0xFFFFFF'
         };
         this.currentTime = 0;
+
         this.createPool(30000,this.options);
-        this.throw(100);
+        this.throw(200);
     }
+
+    // Creer le Pool
     createPool(nb, options){
 
         for (let i = 0; i < nb; i++) {
@@ -21,7 +24,8 @@ class Emitter {
             this.pool.push(p);
         }
     }
-   
+
+   // Recupere le premier particule du pool, puis l'enleve
     getParticleFromPool(){
 
     	let p = this.pool[0];
@@ -29,31 +33,27 @@ class Emitter {
     	return p;
 
     }
-
+    // Remet la particule dans le pool
     returnParticleToPool(p){
     	p.reset();
     	this.pool.push(p);
     }
 
+    // fonction throw qui affiche les particules
     throw(nb, pool){
         for (let i = 0; i < nb; i++) {
             let p = this.getParticleFromPool();
             if(pool == 1){
-            	p.tint = 0xe74c3c;
+            	p.tint = 0x6019B2;
             }else if(pool == 2){
-            	p.tint = 0x00D094;
+            	p.tint = 0xFFB54C;
             }
             this.particles.push(p);
 			this.scene.addChild(p);
         }
     }
-    update(dt){
-    	// this.currentTime += dt;
 
-    	// if(this.currentTime > 1380){
-    	// 	this.currentTime = 0;
-    	// 	this.throw(200);
-    	// }
+    update(dt){
 
         for(var i = 0; i < this.particles.length; i++) {
         	let p = this.particles[i];
@@ -67,6 +67,7 @@ class Emitter {
         }
     }
 
+    // throw particules destinés à representer le "KICK"
     onTreble(dt, nb){
     	this.currentTime += dt;
 
@@ -74,8 +75,9 @@ class Emitter {
     		this.currentTime = 0;
     		this.throw(nb, 1);
     	}
+        this.scene.renderer.backgroundColor = 0x2B0F4C;
     }
-
+     // throw particule destiné à representer le "SNARE"
     onSnare(dt, nb){
     	this.currentTime += dt;
     	if(this.currentTime > 1380){
@@ -85,7 +87,7 @@ class Emitter {
             for(var i = 0; i < this.particles.length; i++) {
                 let p = this.particles[i];
 
-                p.pulse(dt);
+                p.pulse();
             }
     	}
 

@@ -1,40 +1,39 @@
 import {Graphics} from 'pixi.js';
 
-class Decagone extends Graphics{
+class Polygone extends Graphics{
 
 	constructor(options){
 
 		super();
 		this.options = options;
-		this.x = this.options.x;
-		this.y = this.options.y;
-		// this.beginFill(this.options.color);
-		this.lineStyle(5,this.options.color);
-		this.size = 150;
-		this.lines = [];
-		this.setDecagone();
-		console.log(this.lines);
-		
-		
-	}
-	setDecagone(){
-		var numberOfSides = 10;
 		this.x = this.options.x/2;
 		this.y = this.options.y/2;
+		this.lineStyle(5,this.options.color);
+		this.size = this.options.size;
+		this.alpha = 0.6;
+		this.radius = Math.random()*30;
+		this.lines = [];
+		this.setPolygone();
+	}
+
+	// Setup les points du polygone
+	setPolygone(){
+		var numberOfSides = 30;
 	    this.moveTo(this.x +  this.size * Math.cos(0), this.y +  this.size *  Math.sin(0));
 	    for (var i = 1; i <= numberOfSides ;i ++) {
 		    let originX = this.x + this.size * Math.cos(i * 2 * Math.PI / numberOfSides);
 		    let originY =  this.y + this.size * Math.sin(i * 2 * Math.PI / numberOfSides);
-		    let angle = 0;
-		    let radius = 100;
-		    this.dx = this.x-originX;
-			this.dy = this.y-originY;
-		    this.lines.push({x:originX, y:originY});
+		    this.lines.push({ox:originX,
+		    				 oy:originY,
+		    				 x:originX, 
+		    				 y:originY,
+		    				 angle:Math.random()*Math.PI*2,
+		    				 radius:Math.random()*30
+		    				});
 		}
-		console.log(this.lines);
 	}
-
-	drawDecagone(){
+	// Draw les points du polygone
+	drawPolygone(){
 		for(let i = 0; i < this.lines.length; i++ ){
 
 			let x1 = this.lines[i].x;
@@ -52,44 +51,24 @@ class Decagone extends Graphics{
 		}
 	}
 
+	// Mise à jour des positions d'un point du polygone
+	update(i, dt){
+		this.currentTime += dt;
 
-	update(){
-		// 
-		if(i == 0){
+		let point = this.lines[i];
 
-		}
-		for(var i; i < this.lines.length; i+2){
+		this.clear();
+		this.lineStyle(5,this.options.color);
+		point.angle += 0.02;
+		let toX = point.ox + Math.sin(point.angle)*point.radius;
+		let toY = point.oy + Math.cos(point.angle)*point.radius;
+		let easing = 0.3;
+		point.x += ( toX - point.x ) * easing;
+		point.y += ( toY - point.y ) * easing;
 
-			this.update1(i);
-	
-		}
-		// this.reset(1);
-		
-	}
-
-	update1(i){
-		
-		this.angle = Math.floor(Math.random() * 360);
-		if(this.lines[i].x > this.x || this.lines[i].y > this.y){
-			this.radius = 10;
-			
-		}else{
-			this.radius = -10;
-		}
-		console.log(this.radius);
-		this.lines[i].x += Math.sin(this.angle* Math.PI/180)*Math.floor(Math.random() * this.radius);
-		this.lines[i].y += Math.cos(this.angle* Math.PI/180)*Math.floor(Math.random() * this.radius);
-		this.drawDecagone();
-		
-
+		this.drawPolygone();
+					 
 	}	
-
-	reset(){
-		this.x = this.options.x;
-		this.y = this.options.y;
-		this.setDecagone();
-		this.drawDecagone();
-	}
 }
 
-export default Decagone;
+export default Polygone;
