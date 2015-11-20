@@ -97,16 +97,16 @@ class App {
 
     this.graph.clear();
     
-    this.decagone.clear();
+    // this.decagone.clear();
 
-    for(var i = 0; i < this.decagone.lines.length; i++){
-      for(var j = 0; j < this.customFrequency.length; j++){
-        if(this.audio.frequencyData[j]>220){
-          this.decagone.update1(i);
-        }
-      }
+    // for(var i = 0; i < this.decagone.lines.length; i++){
+    //   for(var j = 0; j < this.customFrequency.length; j++){
+    //     if(this.audio.frequencyData[j]>150){
+    //       this.decagone.update1(i);
+    //     }
+    //   }
       
-    }
+    // }
 
       
 
