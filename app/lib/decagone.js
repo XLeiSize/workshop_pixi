@@ -23,9 +23,13 @@ class Decagone extends Graphics{
 		this.y = this.options.y/2;
 	    this.moveTo(this.x +  this.size * Math.cos(0), this.y +  this.size *  Math.sin(0));
 	    for (var i = 1; i <= numberOfSides ;i ++) {
-		    let from = this.x + this.size * Math.cos(i * 2 * Math.PI / numberOfSides);
-		    let to =  this.y + this.size * Math.sin(i * 2 * Math.PI / numberOfSides);
-		    this.lines.push({x:from, y:to});
+		    let originX = this.x + this.size * Math.cos(i * 2 * Math.PI / numberOfSides);
+		    let originY =  this.y + this.size * Math.sin(i * 2 * Math.PI / numberOfSides);
+		    let angle = 0;
+		    let radius = 100;
+		    this.dx = this.x-originX;
+			this.dy = this.y-originY;
+		    this.lines.push({x:originX, y:originY});
 		}
 		console.log(this.lines);
 	}
@@ -39,8 +43,6 @@ class Decagone extends Graphics{
 			if(this.lines[i+1]){
 				let	x2 = this.lines[i+1].x;
 				let	y2 = this.lines[i+1].y;
-
-				
 				this.moveTo(x1, y1);
 				this.lineTo(x2, y2);
 			}else{
@@ -52,49 +54,42 @@ class Decagone extends Graphics{
 
 
 	update(){
-		this.clear();
-		console.log(this.lines.length);
-		this.update1(1);
-		this.drawDecagone();
+		// 
+		if(i == 0){
+
+		}
+		for(var i; i < this.lines.length; i+2){
+
+			this.update1(i);
+	
+		}
 		// this.reset(1);
 		
 	}
 
 	update1(i){
-		this.lines[i].x *=1;
-		this.lines[i].y *=1.1;
-		this.lines[i+1].x *=1;
-		this.lines[i+1].y *=1.1;
-
-		console.log(this.lines[i].y);
+		
+		this.angle = Math.floor(Math.random() * 360);
+		if(this.lines[i].x > this.x || this.lines[i].y > this.y){
+			this.radius = 10;
+			
+		}else{
+			this.radius = -10;
+		}
+		console.log(this.radius);
+		this.lines[i].x += Math.sin(this.angle* Math.PI/180)*Math.floor(Math.random() * this.radius);
+		this.lines[i].y += Math.cos(this.angle* Math.PI/180)*Math.floor(Math.random() * this.radius);
+		this.drawDecagone();
+		
 
 	}	
 
-	reset(i){
-		let x1 = this.lines[i].x;
-		let	y1 = this.lines[i].y;
-		let	x2 = this.lines[i+1].x;
-		let	y2 = this.lines[i+1].y;
-
-		x1 -= 10;
-		y1 -= 10;
-		x2 -= 10;
-		y2 -= 10;
-		this.lines.splice(i,0,{x:x1, y:y1});
-		this.lines.splice(i+1,0,{x:x2, y:y2});
-
+	reset(){
+		this.x = this.options.x;
+		this.y = this.options.y;
+		this.setDecagone();
+		this.drawDecagone();
 	}
-
-
-
-
-
-	reset(dt){
-		this.tint = 0xFFFFFF;
-		this.size -=1;
-	}
-
-
 }
 
 export default Decagone;

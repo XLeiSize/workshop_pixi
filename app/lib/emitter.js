@@ -19,7 +19,6 @@ class Emitter {
         for (let i = 0; i < nb; i++) {
             let p = new Particle(options);
             this.pool.push(p);
-            // this.scene.addChild(p);
         }
     }
    
@@ -74,12 +73,6 @@ class Emitter {
     	if(this.currentTime > 1380){
     		this.currentTime = 0;
     		this.throw(nb, 1);
-            // for(var i = 0; i < this.particles.length; i++) {
-            //     let p = this.particles[i];
-                
-            //     p.pulse();
-            //     p.update(dt);
-            // }
     	}
     }
 

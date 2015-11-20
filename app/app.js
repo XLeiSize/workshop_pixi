@@ -46,10 +46,12 @@ class App {
 
     this.audio = new Audio(this.path);
     this.audio.loadSound(this.path);
+
+    this.customFrequency = [19, 28, 37, 56, 112, 25, 37, 50, 75, 150, 17, 26, 33, 50, 22, 133];
+    console.log(this.customFrequency.length);
     this.addListeners();
 
-     this.customFrequency = [19, 28, 37, 56, 112, 25, 37, 50, 75, 150, 17, 26, 33, 50, 22, 133];
-    console.log(this.customFrequency);
+    
 
   }
 
@@ -95,97 +97,81 @@ class App {
 
     this.graph.clear();
     
+    this.decagone.clear();
 
-
-
-
-      // if(this.audio.frequencyData[19]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      // if(this.audio.frequencyData[28]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      //  if(this.audio.frequencyData[37]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      //  if(this.audio.frequencyData[56]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      // if(this.audio.frequencyData[112]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLINGBLING');
-      // }
-
-      // // *********
-
-      // if(this.audio.frequencyData[25]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      // if(this.audio.frequencyData[37]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      // if(this.audio.frequencyData[50]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-      
-      // if(this.audio.frequencyData[75]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-      // if(this.audio.frequencyData[150]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLINGBLINGBLING');
-      // }
-
-      // // ********
-      
-      
-      // if(this.audio.frequencyData[17]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      // if(this.audio.frequencyData[26]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      // if(this.audio.frequencyData[33]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-      // if(this.audio.frequencyData[50]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      // // *********
-
-      // if(this.audio.frequencyData[22]>220){
-      //     this.decagone.update(this.DELTA_TIME);
-      //     console.log('BLING');
-      // }
-
-      if(this.audio.frequencyData[133]>220){
-          this.decagone.update();
-          console.log('BLINGBLINGBLI');
+    for(var i = 0; i < this.decagone.lines.length; i++){
+      for(var j = 0; j < this.customFrequency.length; j++){
+        if(this.audio.frequencyData[j]>220){
+          this.decagone.update1(i);
+        }
       }
-  
-     
+      
+    }
 
+      
+
+    // // *********
+
+    // if(this.audio.frequencyData[25]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLING');
+    // }
+
+    // if(this.audio.frequencyData[37]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLING');
+    // }
+
+    // if(this.audio.frequencyData[50]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLING');
+    // }
+    
+    // if(this.audio.frequencyData[75]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLING');
+    // }
+    // if(this.audio.frequencyData[150]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLINGBLINGBLING');
+    // }
+
+    // // ********
+    
+    
+    // if(this.audio.frequencyData[17]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLING');
+    // }
+
+    // if(this.audio.frequencyData[26]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLING');
+    // }
+
+    // if(this.audio.frequencyData[33]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLING');
+    // }
+    // if(this.audio.frequencyData[50]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLING');
+    // }
+
+    // // *********
+
+    // if(this.audio.frequencyData[22]>220){
+    //     this.decagone.update(this.DELTA_TIME);
+    //     console.log('BLING');
+    // }
+
+    if(this.audio.frequencyData[133]>220){
+        this.decagone.update();
+        console.log('BLINGBLINGBLI');
+    }
+
+     
+    // Création du graphique de visualisations des fréquences
     var barWidth = (window.innerWidth) / this.audio.frequencyData.length;
     var avgFrequencyData = [];
     var numberLines = 10;
@@ -201,11 +187,13 @@ class App {
       this.graph.drawRect(distance, window.innerHeight /2, barWidth, -barHeight);
       this.graph.drawRect(distance, window.innerHeight /2, barWidth, barHeight);
 
-
+        // TREBLE frequence
         if(this.audio.frequencyData[5]>240){
             this.emitter.onTreble(this.DELTA_TIME,  2);
 
         }
+
+        // SNARE Frequence
         if(this.audio.frequencyData[10]>240){
             this.emitter.onSnare(this.DELTA_TIME,  3);
         }

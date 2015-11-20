@@ -33,11 +33,6 @@ class Particle extends Graphics{
 		}
 		this.life -= dt;
 	}
-	updateSlow(){
-		this.x += Math.sin(this.angle * Math.PI/180) * this.vx/2;
-		this.y += Math.cos(this.angle * Math.PI/180) * this.vy/2;
-		
-	}
 
 
 	reset(){
@@ -47,15 +42,12 @@ class Particle extends Graphics{
 		this.isDead = false;
 	}
 
-	colorTo(color){
-		this.beginFill(color);
-	}
-
 	pulse(dt){
 		this.vx = 1.5;
 		this.vy = 1.5;
 		this.variation = Math.floor(Math.random() *5);
-		this.updateSlow();
+		this.x += Math.sin(this.angle * Math.PI/180) * this.vx/2;
+		this.y += Math.cos(this.angle * Math.PI/180) * this.vy/2;
 	}
 
 
